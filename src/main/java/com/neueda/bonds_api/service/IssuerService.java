@@ -1,6 +1,8 @@
 package com.neueda.bonds_api.service;
-
-import com.neueda.bonds_api.entity.BondEntity;
+import com.neueda.bonds_api.entity.IssuerEntity;
+import com.neueda.bonds_api.repository.IssuerRepository;
+import java.util.List;
+import java.util.Optional;
 
 public class IssuerService {
 
@@ -11,10 +13,10 @@ public class IssuerService {
     }
 
     public List<IssuerEntity> viewIssuers(){
-        issuerRepository.findAll();
+        return issuerRepository.findAll();
     }
 
-    public IssuerEntity viewByIssuerId(long id){
+    public Optional<IssuerEntity> viewByIssuerId(long id){
         return issuerRepository.findById(id);
     }
 }
