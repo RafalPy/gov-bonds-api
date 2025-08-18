@@ -3,10 +3,7 @@ package com.neueda.bonds_api.entity;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -19,6 +16,9 @@ public class BondEntity {
     private int faceValue;
     private int costPrice;
     private String ticker;
+    @ManyToOne
+    @JoinColumn(name = "issuerId",nullable=false)
+    private IssuerEntity issuer;
 
     public LocalDate getExpiryDate() {
         return expiryDate;
@@ -75,16 +75,21 @@ public class BondEntity {
 
     public BondEntity() {}
 
-    public BondEntity(long id,LocalDate expiryDate, int faceValue,int costPrice,String ticker, String Description,LocalDate issueDate){
-        this.id = id;
+    public BondEntity(LocalDate expiryDate, int faceValue,IssuerEntity issuer,int costPrice,String ticker, String Description,LocalDate issueDate){
         this.expiryDate=expiryDate;
         this.faceValue = faceValue;
         this.costPrice=costPrice;
         this.ticker = ticker;
         this.Description=Description;
         this.issueDate = issueDate;
+        this.issuer=issuer;
     }
 
-//    public BondEntity(Long id, DateTime expiryDate);
+
+
+
+
+
+
 
 }

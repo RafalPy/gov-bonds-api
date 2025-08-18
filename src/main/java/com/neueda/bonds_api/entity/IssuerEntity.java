@@ -1,9 +1,9 @@
 package com.neueda.bonds_api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -52,13 +52,16 @@ public class IssuerEntity {
     private String rating;
     public IssuerEntity(){
     }
-    public IssuerEntity(Long id, String country, String currency, String continent, String rating){
-        this.id = id;
+    public IssuerEntity(String country, String currency, String continent, String rating){
         this.country = country;
         this.currency = currency;
         this.continent = continent;
         this.rating = rating;
     }
+
+    @OneToMany(mappedBy = "bond", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BondEntity> bonds = new ArrayList<>();
+
 
 
 }
