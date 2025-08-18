@@ -1,9 +1,13 @@
 package com.neueda.bonds_api.service;
 import com.neueda.bonds_api.entity.IssuerEntity;
+import com.neueda.bonds_api.exception.IssuerNotFoundException;
 import com.neueda.bonds_api.repository.IssuerRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class IssuerService {
 
     private final IssuerRepository issuerRepository;
@@ -12,11 +16,12 @@ public class IssuerService {
         this.issuerRepository=issuerRepository;
     }
 
-    public List<IssuerEntity> viewIssuers(){
+    public List<IssuerEntity> getIssuers(){
         return issuerRepository.findAll();
     }
 
-    public Optional<IssuerEntity> viewByIssuerId(long id){
-        return issuerRepository.findById(id);
+    public IssuerEntity getIssuersById(long id){
+        return issuerRepository.findById(id)
+                .orElseThrow(() -> new IssuerNotFoundException("Issuer with id " + id + " not found"));
     }
 }
