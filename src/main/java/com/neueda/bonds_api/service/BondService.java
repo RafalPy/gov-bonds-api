@@ -6,6 +6,9 @@ import com.neueda.bonds_api.repository.BondRepository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BondService {
 
     private final BondRepository bondRepository;
