@@ -6,7 +6,7 @@ public class BondService {
 
     private final BondRepository bondRepository;
 
-    public BondService(BoondRepository bondRespository){
+    public BondService(BondRepository bondRespository){
         this.bondRepository=bondRespository;
     }
 
