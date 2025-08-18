@@ -14,11 +14,11 @@ public class BondService {
         this.bondRepository=bondRespository;
     }
 
-    public List<BondEntity> viewBonds(){
+    public List<BondEntity> getAllBonds(){
         return bondRepository.findAll();
     }
 
-    public Optional<BondEntity> viewByBondId(long id){
+    public Optional<BondEntity> getBondById(long id){
         return bondRepository.findById(id);
     }
 
