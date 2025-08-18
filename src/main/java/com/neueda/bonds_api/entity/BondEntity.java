@@ -15,7 +15,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class BondEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,9 +31,13 @@ public class BondEntity {
     public BondEntity() {}
 
     public BondEntity(long id,LocalDate expiryDate, int faceValue,int costPrice,String ticker, String Description,LocalDate issueDate){
-        this.costPrice=costPrice;
-        this.Description=Description;
+        this.id = id;
         this.expiryDate=expiryDate;
+        this.faceValue = faceValue;
+        this.costPrice=costPrice;
+        this.ticker = ticker;
+        this.Description=Description;
+        this.issueDate = issueDate;
     }
 
 //    public BondEntity(Long id, DateTime expiryDate);
