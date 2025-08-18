@@ -11,7 +11,6 @@ public class IssuerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     public String getCountry() {

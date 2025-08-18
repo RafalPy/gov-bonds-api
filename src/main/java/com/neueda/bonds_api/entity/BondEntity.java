@@ -12,6 +12,7 @@ public class BondEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private LocalDate expiryDate;
     private int faceValue;
     private int costPrice;

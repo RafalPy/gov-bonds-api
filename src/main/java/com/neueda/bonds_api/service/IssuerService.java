@@ -23,4 +23,8 @@ public class IssuerService {
         return issuerRepository.findById(id)
                 .orElseThrow(() -> new IssuerNotFoundException("Issuer with id " + id + " not found"));
     }
+
+    public IssuerEntity createIssuer(IssuerEntity issuer) {
+        return issuerRepository.save(issuer);
+    }
 }

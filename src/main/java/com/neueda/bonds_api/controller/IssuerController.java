@@ -3,10 +3,7 @@ package com.neueda.bonds_api.controller;
 import com.neueda.bonds_api.entity.IssuerEntity;
 import com.neueda.bonds_api.service.IssuerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,12 @@ public class IssuerController {
     public ResponseEntity<IssuerEntity> getIssuersById(@PathVariable Long id) {
         IssuerEntity issuer = issuerService.getIssuersById(id);
         return ResponseEntity.ok(issuer);
+    }
+
+    @PostMapping
+    public ResponseEntity<IssuerEntity> createItem(@RequestBody IssuerEntity issuer) {
+        IssuerEntity createdIssuer = issuerService.createIssuer(issuer);
+        return ResponseEntity.ok(createdIssuer);
     }
 
 }
