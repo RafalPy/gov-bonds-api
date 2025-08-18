@@ -1,10 +1,10 @@
 package com.neueda.bonds_api.service;
 
 import com.neueda.bonds_api.entity.BondEntity;
+import com.neueda.bonds_api.exception.BondNotFoundException;
 import com.neueda.bonds_api.repository.BondRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public class BondService {
 
@@ -18,8 +18,9 @@ public class BondService {
         return bondRepository.findAll();
     }
 
-    public Optional<BondEntity> getBondById(long id){
-        return bondRepository.findById(id);
+    public BondEntity getBondById(long id){
+        return bondRepository.findById(id)
+        .orElseThrow(() -> new BondNotFoundException("Bond with id "+id+" not found"));
     }
 
 }

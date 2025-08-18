@@ -1,4 +1,4 @@
-package com.neueda.bonds_api.entity.controller;
+package com.neueda.bonds_api.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +7,6 @@ import com.neueda.bonds_api.entity.BondEntity;
 import com.neueda.bonds_api.service.BondService;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,11 +30,11 @@ public class BondController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<BondEntity>> getBondById(@PathVariable Long id){
+    public ResponseEntity<BondEntity> getBondById(@PathVariable Long id){
         if (id == null){
             // throw new InvalidParamsException("Item id must be provided");
         }
-        Optional<BondEntity> bond = bondService.getBondById(id);
+        BondEntity bond = bondService.getBondById(id);
         return ResponseEntity.ok(bond);
     }
     
