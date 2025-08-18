@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(IssuerNotFoundException.class)
     @ResponseBody
     public ResponseEntity<String> handleIssuerNotFoundException(IssuerNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());

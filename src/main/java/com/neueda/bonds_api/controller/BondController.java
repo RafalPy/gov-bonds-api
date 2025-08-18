@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neueda.bonds_api.entity.BondEntity;
+import com.neueda.bonds_api.exception.InvalidParamsException;
 import com.neueda.bonds_api.service.BondService;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class BondController {
     @GetMapping("/{id}")
     public ResponseEntity<BondEntity> getBondById(@PathVariable Long id){
         if (id == null){
-            // throw new InvalidParamsException("Item id must be provided");
+            throw new InvalidParamsException("Item id must be provided");
         }
         BondEntity bond = bondService.getBondById(id);
         return ResponseEntity.ok(bond);
