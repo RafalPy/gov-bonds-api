@@ -1,8 +1,10 @@
 package com.neueda.bonds_api.service;
 
 import com.neueda.bonds_api.entity.BondEntity;
+import com.neueda.bonds_api.repository.BondRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BondService {
 
@@ -16,7 +18,7 @@ public class BondService {
         return bondRepository.findAll();
     }
 
-    public BondEntity viewByBondId(long id){
+    public Optional<BondEntity> viewByBondId(long id){
         return bondRepository.findById(id);
     }
 
