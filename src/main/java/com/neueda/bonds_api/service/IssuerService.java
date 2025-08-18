@@ -5,7 +5,6 @@ import com.neueda.bonds_api.repository.IssuerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class IssuerService {
