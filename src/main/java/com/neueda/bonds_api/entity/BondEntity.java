@@ -1,11 +1,7 @@
 
 package com.neueda.bonds_api.entity;
 
-import java.lang.annotation.Inherited;
 import java.time.LocalDate;
-import java.util.Date;
-
-import javax.annotation.processing.Generated;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
