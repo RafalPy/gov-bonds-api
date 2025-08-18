@@ -36,7 +36,7 @@ public class BondEntity {
         this.faceValue = faceValue;
         this.costPrice=costPrice;
         this.ticker = ticker;
-        this.Description=Description
+        this.Description=Description;
         this.issueDate = issueDate;
     }
 
