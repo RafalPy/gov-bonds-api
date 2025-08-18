@@ -2,6 +2,8 @@
 package com.neueda.bonds_api.entity;
 
 import java.lang.annotation.Inherited;
+import java.time.LocalDate;
+import java.util.Date;
 
 import javax.annotation.processing.Generated;
 
@@ -17,18 +19,18 @@ public class BondEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private DateTime expiryDate;
+    private LocalDate expiryDate;
     private int faceValue;
     private int costPrice;
     private String ticker;
     private String Description;
-    private DateTime issueDate;
+    private LocalDate issueDate;
 
     //Constructor
 
     public BondEntity() {
     }
 
-    public BondEntity(Long id, DateTime expiryDate)
+//    public BondEntity(Long id, DateTime expiryDate);
 
 }
