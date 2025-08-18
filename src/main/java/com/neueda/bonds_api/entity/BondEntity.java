@@ -28,7 +28,12 @@ public class BondEntity {
 
     //Constructor
 
-    public BondEntity() {
+    public BondEntity() {}
+
+    public BondEntity(long id,LocalDate expiryDate, int faceValue,int costPrice,String ticker, String Description,LocalDate issueDate){
+        this.costPrice=costPrice;
+        this.Description=Description;
+        this.expiryDate=expiryDate;
     }
 
 //    public BondEntity(Long id, DateTime expiryDate);
