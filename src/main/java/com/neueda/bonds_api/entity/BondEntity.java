@@ -16,8 +16,9 @@ public class BondEntity {
     private int faceValue;
     private int costPrice;
     private String ticker;
+
     @ManyToOne
-    @JoinColumn(name = "issuerId",nullable=false)
+    @JoinColumn(name = "issuer_id",nullable=false)
     private IssuerEntity issuer;
 
     public LocalDate getExpiryDate() {

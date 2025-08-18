@@ -59,7 +59,7 @@ public class IssuerEntity {
         this.rating = rating;
     }
 
-    @OneToMany(mappedBy = "bond", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BondEntity> bonds = new ArrayList<>();
 
 

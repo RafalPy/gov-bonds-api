@@ -46,4 +46,6 @@ INSERT INTO bond_entity (id, expiry_date, face_value, cost_price, ticker, descri
 (17, '2031-09-30', 1700, 1600, 'NO10Y', 'Norway 10-Year Bond', '2021-09-30', 17),
 (18, '2036-02-10', 2200, 2000, 'RU15Y', 'Russia 15-Year Bond', '2021-02-10', 18),
 (19, '2029-12-31', 800, 780, 'SG5Y', 'Singapore 5-Year Bond', '2024-12-31', 19),
-(20, '2033-11-05', 1250, 1150, 'KR10Y', 'South Korea 10-Year Bond', '2023-11-05', 20);
+(20, '2033-11-05', 1250, 1150, 'KR10Y', 'South Korea 10-Year Bond', '2023-11-05', 20),
+(21, '2030-12-31', 1000, 950, 'US10Y', '10-Year US Treasury Bond', '2020-01-01', 1),
+(22, '2030-12-31', 1000, 950, 'US10Y', '10-Year US Treasury Bond', '2020-01-01', 1);
