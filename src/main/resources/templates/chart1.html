@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8" />
     <title>Bond Viewer - Chart 1</title>
 
@@ -23,7 +24,75 @@
 <!-- Navbar -->
 <div th:replace="~{navbar :: navbar}"></div>
 
+</br>
+</br>
+</br>
+<h1>Average Profit Margin by Country</h1>
+    <canvas id="profitMarginChart" width="400" height="400"></canvas>
 
+    <script>
+        // Fetch data from the /average-profit-margin endpoint
+        fetch('/bonds/average-profit-margin')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Transform the data into labels and values for the chart
+                const labels = data.map(item => item.country); // Assuming 'country' is a key in the response
+                const values = data.map(item => item.averageProfitMargin); // Assuming 'averageProfitMargin' is a key in the response
+
+                // Create the pie chart
+                const ctx = document.getElementById('profitMarginChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Average Profit Margin',
+                            data: values,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return `${tooltipItem.label}: ${tooltipItem.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
 
 </body>
 </html>
