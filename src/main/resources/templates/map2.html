@@ -18,8 +18,8 @@
           color: #336699;
         }
         #map2 {
-          width: 900px;
-          height: 500px;
+          width: 1200px;
+          height: 900px;
         }
     </style>
 
@@ -48,7 +48,16 @@
         let data = google.visualization.arrayToDataTable(dataArray);
 
         let options = {
-          title : 'Average Bond return % by Country'
+          title : 'Average Bond return % by Country',
+          titleTextStyle: {
+            color: '#336699',
+            fontSize: 20,
+            bold: true
+          },
+          colorAxis: {colors: ['#111E0B', '#46B83D']}, // Gradient from light to dark blue
+          backgroundColor: '#eef',
+          datalessRegionColor: '#E2E2E2', // Light gray for regions without data
+          defaultColor: '#E2E2E2', // Default color for regions without data
         };
 
         let chart = new google.visualization.GeoChart(document.getElementById('map2'));
@@ -66,6 +75,5 @@
 <div id="map2" class="pt-10 "></div>
 </div>
 
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
