@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface BondRepository extends JpaRepository<BondEntity,Long> {
 
-    @Query("SELECT b.issuer.country AS country, AVG((b.faceValue - b.costPrice) * 1.0 / b.costPrice) AS averageProfitMargin " +
+    @Query("SELECT b.issuer.country AS country, AVG((b.faceValue - b.costPrice) * 100.0 / b.costPrice) AS averageProfitMargin " +
            "FROM BondEntity b " +
            "GROUP BY b.issuer.country")
     List<Map<String, Object>> findAverageProfitMarginByCountry();
