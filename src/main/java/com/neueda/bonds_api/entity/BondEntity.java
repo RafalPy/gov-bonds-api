@@ -28,6 +28,13 @@ public class BondEntity {
         return expiryDate;
     }
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setExpiryDate(LocalDate expiryDate) {
         this.expiryDate = expiryDate;
     }

@@ -84,6 +84,22 @@
 
 
 <script>
+
+  async function deleteBond(id) {
+    try {
+      const response = await fetch(`/bonds/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete bond');
+      }
+      // Refresh the table after deletion
+      fetchBonds();
+    } catch (error) {
+      console.error('Error deleting bond:', error);
+    }
+  }
+
   async function fetchBonds() {
     try {
       const response = await fetch('/bonds');
@@ -108,7 +124,9 @@
           <td class="px-6 py-4">${bond.faceValue}</td>
           <td class="px-6 py-4">${bond.costPrice}</td>
           <td class="px-6 py-4 text-right">
-            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+            <a href="#" onclick="deleteBond(${bond.id}); return false;"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+            Delete</a>
           </td>
         `;
         tableBody.appendChild(row);

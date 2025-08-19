@@ -30,4 +30,11 @@ public class BondService {
     public List<Map<String, Object>> getAverageProfitMarginByCountry() {
         return bondRepository.findAverageProfitMarginByCountry();
     }
+
+    public void deleteBondById(Long id) {
+        if (!bondRepository.existsById(id)) {
+            throw new BondNotFoundException("Bond with id " + id + " not found");
+        }
+        bondRepository.deleteById(id);
+    }
 }

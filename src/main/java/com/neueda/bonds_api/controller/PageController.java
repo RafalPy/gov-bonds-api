@@ -17,10 +17,6 @@ public class PageController {
         return "map1";
     }
 
-    @GetMapping("/map2")
-    public String map2Page() {
-        return "map2";
-    }
 
     @GetMapping("/chart1")
     public String chart1Page() {

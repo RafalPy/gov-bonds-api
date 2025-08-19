@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -44,6 +45,15 @@ public class BondController {
     public ResponseEntity<List<Map<String, Object>>> getAverageProfitMarginByCountry() {
         List<Map<String, Object>> result = bondService.getAverageProfitMarginByCountry();
         return ResponseEntity.ok(result);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBondById(@PathVariable Long id) {
+        if (id == null) {
+            throw new InvalidParamsException("Item id must be provided");
+        }
+        bondService.deleteBondById(id);
+        return ResponseEntity.noContent().build();
     }
     
 }
