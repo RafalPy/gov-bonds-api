@@ -1,48 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8" />
-    <title>Bond Viewer - Chart 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bond Viewer - Average Profit Margin</title>
 
     <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         body {
-          font-family: Arial, sans-serif;
-          background-color: #eef;
-          text-align: center;
-          padding: 50px;
+            background-color: #f9fafb; /* Light gray background */
         }
-        h1 {
-          color: #336699;
+        canvas {
+            max-width: 600px;
+            margin: 0 auto;
         }
     </style>
 </head>
-<body>
-  
-<!-- Navbar -->
-<div th:replace="~{navbar :: navbar}"></div>
+<body class="flex flex-col items-center justify-center min-h-screen">
 
-</br>
-</br>
-</br>
-<h1>Average Profit Margin by Country</h1>
-    <canvas id="profitMarginChart" width="400" height="400"></canvas>
+    <!-- Navbar -->
+    <div th:replace="~{navbar :: navbar}" class="w-full bg-blue-600 text-white py-4 text-center">
+        <h1 class="text-2xl font-bold">Bond Viewer</h1>
+    </div>
 
+    <!-- Page Content -->
+    <div class="mt-10 text-center">
+        <h1 class="text-3xl font-bold text-blue-700 mb-6">Top 10 Average Profit Margins by Country</h1>
+        <p class="text-gray-600 mb-4">Visualizing the top 10 average profit margins for bonds across different countries.</p>
+        <canvas id="profitMarginChart" class="shadow-lg rounded-lg bg-white p-4"></canvas>
+    </div>
+
+    <!-- Chart Script -->
     <script>
         // Fetch data from the /average-profit-margin endpoint
         fetch('/bonds/average-profit-margin')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Failed to fetch data from the server');
                 }
                 return response.json();
             })
             .then(data => {
-                // Transform the data into labels and values for the chart
-                const labels = data.map(item => item.country); // Assuming 'country' is a key in the response
-                const values = data.map(item => item.averageProfitMargin); // Assuming 'averageProfitMargin' is a key in the response
+                // Debugging: Log the raw data to ensure it's being fetched correctly
+                console.log('Raw data from API:', data);
+
+                // Sort data by profit margin in descending order
+                const sortedData = data.sort((a, b) => b.averageProfitMargin - a.averageProfitMargin);
+
+                // Take the top 10 entries
+                const top10Data = sortedData.slice(0, 10);
+
+                // Transform the data into labels and rounded values for the chart
+                const labels = top10Data.map(item => item.country); // Assuming 'country' is a key in the response
+                const values = top10Data.map(item => parseFloat(item.averageProfitMargin.toFixed(2))); // Round to 2 decimal places
+
+                // Debugging: Log the labels and values
+                console.log('Labels:', labels);
+                console.log('Values:', values);
 
                 // Create the pie chart
                 const ctx = document.getElementById('profitMarginChart').getContext('2d');
@@ -54,20 +72,12 @@
                             label: 'Average Profit Margin',
                             data: values,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
+                                '#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F',
+                                '#EDC948', '#B07AA1', '#FF9DA7', '#9C755F', '#BAB0AC'
                             ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                            hoverBackgroundColor: [
+                                '#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F',
+                                '#EDC948', '#B07AA1', '#FF9DA7', '#9C755F', '#BAB0AC'
                             ],
                             borderWidth: 1
                         }]
@@ -77,6 +87,12 @@
                         plugins: {
                             legend: {
                                 position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    },
+                                    color: '#333'
+                                }
                             },
                             tooltip: {
                                 callbacks: {
@@ -91,6 +107,7 @@
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+                alert('Failed to load chart data. Please try again later.');
             });
     </script>
 
