@@ -17,6 +17,8 @@ public class BondEntity {
     private int faceValue;
     private int costPrice;
     private String ticker;
+    private String Description;
+    private LocalDate issueDate;
 
     @ManyToOne
     @JoinColumn(name = "issuer_id",nullable=false)
@@ -70,8 +72,7 @@ public class BondEntity {
         this.issueDate = issueDate;
     }
 
-    private String Description;
-    private LocalDate issueDate;
+
 
     //Constructor
 

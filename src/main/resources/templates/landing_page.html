@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>My Cool Landing Page</title>
-    <script>
-        function showMessageAndGo() {
-            alert("Welcome to my Spring Boot app!");
-            window.location.href = '/landing'; // Redirect to /landing
-        }
-    </script>
+    <title>Bond Viewer</title>
+
+    <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
           font-family: Arial, sans-serif;
@@ -22,7 +19,71 @@
     </style>
 </head>
 <body>
-<h1>Hello from Spring Boot!</h1>
-<button onclick="showMessageAndGo()">Click me</button>
+
+
+<!-- Tailwind Table -->
+<div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Description</th>
+                <th scope="col" class="px-6 py-3">Ticker</th>
+                <th scope="col" class="px-6 py-3">Exipry Date</th>
+                <th scope="col" class="px-6 py-3">Issue Date</th>
+                <th scope="col" class="px-6 py-3">Face Value</th>
+                <th scope="col" class="px-6 py-3">Cost Price</th>
+                <th scope="col" class="px-6 py-3"><span class="sr-only">Delete</span></th>
+            </tr>
+        </thead>
+        <tbody id="bonds-table-body">
+            <!-- Rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  async function fetchBonds() {
+    try {
+      const response = await fetch('/bonds');
+      if (!response.ok) {
+        throw new Error('Failed to fetch bonds data');
+      }
+      const bonds = await response.json();
+
+      const tableBody = document.getElementById('bonds-table-body');
+      tableBody.innerHTML = '';
+
+      bonds.forEach(bond => {
+        const row = document.createElement('tr');
+        row.className = 'bg-white border-b dark:bg-gray-800 dark:border-gray-700';
+
+        row.innerHTML = `
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            ${bond.description}
+          </th>
+          <td class="px-6 py-4">${bond.ticker}</td>
+          <td class="px-6 py-4">${bond.expiryDate}</td>
+          <td class="px-6 py-4">${bond.issueDate}</td>
+          <td class="px-6 py-4">${bond.faceValue}</td>
+          <td class="px-6 py-4">${bond.costPrice}</td>
+          <td class="px-6 py-4 text-right">
+            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    } catch (error) {
+      console.error('Error fetching bonds:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchBonds);
+</script>
+
+
+
+</div>
 </body>
 </html>
