@@ -8,7 +8,22 @@ public class PageController {
 
 
     @GetMapping("/")
-    public String landingPage() {
-        return "landing_page";
+    public String indexPage() {
+        return "index";
+    }
+
+    @GetMapping("/map1")
+    public String map1Page() {
+        return "map1";
+    }
+
+    @GetMapping("/map2")
+    public String map2Page() {
+        return "map2";
+    }
+
+    @GetMapping("/chart1")
+    public String chart1Page() {
+        return "chart1";
     }
 }
