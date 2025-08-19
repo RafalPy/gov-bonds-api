@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bond Viewer - Add Bond</title>
+
+    <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #eef;
+          text-align: center;
+          padding: 50px;
+        }
+        h1 {
+          color: #336699;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="~{navbar :: navbar}"></div>
+
+
+<!-- Tailwind Form -->
+
+<form>
+  <div class="pt-12 grid gap-6 mb-6 md:grid-cols-3">
+      <div>
+          <label for="ticker" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ticker</label>
+          <input type="text" id="ticker" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TCK0001" required />
+      </div>
+      <div>
+          <label for="face_value" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Face Value</label>
+          <input type="number" id="face_value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100" required />
+      </div>
+      <div>
+          <label for="cost_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cost Price</label>
+          <input type="number" id="cost_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="92" required />
+      </div>  
+      <div>
+          <label for="expiry_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expiry Date</label>
+          <input type="date" id="expiry_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2029-11-13" required />
+      </div>
+      <div>
+          <label for="issue_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issue Date</label>
+          <input type="date" id="issue_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2025-08-19" required />
+      </div>
+      <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issuer</label>
+          <input type="text" id="issuer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="US" required />
+      </div>
+  </div>
+
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    Add Bond</button>
+</form>
+
+
+</div>
+</body>
+</html>

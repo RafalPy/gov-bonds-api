@@ -22,4 +22,9 @@ public class PageController {
     public String chart1Page() {
         return "chart1";
     }
+
+    @GetMapping("/addbond")
+    public String addBondPage() {
+        return "addbond";
+    }
 }
