@@ -60,6 +60,18 @@ public class IssuerEntity {
         this.rating = rating;
     }
 
+    public IssuerEntity(long id, String country, String currency, String continent, String rating){
+        this.id = id;
+        this.country = country;
+        this.currency = currency;
+        this.continent = continent;
+        this.rating = rating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     @OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BondEntity> bonds = new ArrayList<>();
 

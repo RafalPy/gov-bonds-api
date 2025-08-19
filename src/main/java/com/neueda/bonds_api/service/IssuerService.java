@@ -25,6 +25,9 @@ public class IssuerService {
     }
 
     public IssuerEntity createIssuer(IssuerEntity issuer) {
+        if (issuer.getId() != null) {
+            throw new IllegalArgumentException("ID must not be provided when creating a new issuer");
+        }
         return issuerRepository.save(issuer);
     }
 }
