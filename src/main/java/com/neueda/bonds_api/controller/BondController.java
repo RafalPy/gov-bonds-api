@@ -8,6 +8,7 @@ import com.neueda.bonds_api.exception.InvalidParamsException;
 import com.neueda.bonds_api.service.BondService;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,5 +40,10 @@ public class BondController {
         return ResponseEntity.ok(bond);
     }
     
+    @GetMapping("/average-profit-margin")
+    public ResponseEntity<List<Map<String, Object>>> getAverageProfitMarginByCountry() {
+        List<Map<String, Object>> result = bondService.getAverageProfitMarginByCountry();
+        return ResponseEntity.ok(result);
+    }
     
 }

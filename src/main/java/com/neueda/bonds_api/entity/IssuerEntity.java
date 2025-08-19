@@ -13,6 +13,11 @@ public class IssuerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String country;
+    private String currency;
+    private String continent;
+    private String rating;
+
     public String getCountry() {
         return country;
     }
@@ -45,10 +50,7 @@ public class IssuerEntity {
         this.rating = rating;
     }
 
-    private String country;
-    private String currency;
-    private String continent;
-    private String rating;
+ 
     public IssuerEntity(){
     }
     public IssuerEntity(String country, String currency, String continent, String rating){

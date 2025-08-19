@@ -17,14 +17,51 @@
           color: #336699;
         }
     </style>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
   
 <!-- Navbar -->
 <div th:replace="~{navbar :: navbar}"></div>
 
+<!-- Map1 -->
+<div id="map1" style="height: 500px;"></div>
 
+<script>
+  async function loadMap() {
+    const response = await fetch('/bonds/average-profit-margin');
+    const data = await response.json();
 
+    const map = L.map('map1').setView([20, 0], 2); // Center the map
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+    }).addTo(map);
+
+    data.forEach(item => {
+      const country = item.country;
+      const avgProfitMargin = item.averageProfitMargin;
+
+      // Use a geocoding API to get latitude and longitude for the country
+      fetch(`https://nominatim.openstreetmap.org/search?country=${country}&format=json`)
+        .then(res => res.json())
+        .then(locationData => {
+          if (locationData.length > 0) {
+            const { lat, lon } = locationData[0];
+            L.marker([lat, lon])
+              .addTo(map)
+              .bindPopup(`<b>${country}</b><br>Avg Profit Margin: ${(avgProfitMargin * 100).toFixed(2)}%`);
+          }
+        });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadMap);
+</script>
 
 </body>
 </html>

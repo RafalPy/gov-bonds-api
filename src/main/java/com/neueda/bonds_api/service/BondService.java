@@ -5,6 +5,7 @@ import com.neueda.bonds_api.exception.BondNotFoundException;
 import com.neueda.bonds_api.repository.BondRepository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,7 @@ public class BondService {
         .orElseThrow(() -> new BondNotFoundException("Bond with id "+id+" not found"));
     }
 
+    public List<Map<String, Object>> getAverageProfitMarginByCountry() {
+        return bondRepository.findAverageProfitMarginByCountry();
+    }
 }
