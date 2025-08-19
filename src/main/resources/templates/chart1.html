@@ -31,7 +31,7 @@
     <div class="mt-10 text-center">
         <h1 class="text-3xl font-bold text-blue-700 mb-6">Top 10 Average Profit Margins by Country</h1>
         <p class="text-gray-600 mb-4">Visualizing the top 10 average profit margins for bonds across different countries.</p>
-        <canvas id="profitMarginChart" class="shadow-lg rounded-lg bg-white p-4"></canvas>
+        <canvas id="profitMarginChart" class="shadow-lg rounded-lg bg-white p-4 w-screen"></canvas>
     </div>
 
     <!-- Chart Script -->
@@ -65,7 +65,7 @@
                 // Create the pie chart
                 const ctx = document.getElementById('profitMarginChart').getContext('2d');
                 new Chart(ctx, {
-                    type: 'pie',
+                    type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [{

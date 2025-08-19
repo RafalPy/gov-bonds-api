@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Bond Viewer - Map 1</title>
+    <title>Bond Viewer - Map 2</title>
 
     <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         body {
           font-family: Arial, sans-serif;
@@ -16,52 +17,70 @@
         h1 {
           color: #336699;
         }
+        #map2 {
+          width: 1200px;
+          height: 900px;
+        }
     </style>
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!--  Google Charts Loader v0 -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      fetch('/bonds/average-profit-margin')
+      .then(response => response.json())
+      .then(jsonData => {
+        console.log('Data fetched:', jsonData);
+        google.charts.load('current', {
+          packages: ['geochart'],
+        });
+        google.charts.setOnLoadCallback(() => drawChart(jsonData));
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+      function drawChart(jsonData) {
+        console.log(jsonData);
+        let dataArray = [];
+        dataArray.push(['Country', 'Average Profit Margin']);
+        jsonData.forEach(item => {
+          dataArray.push([item.country, item.averageProfitMargin]);
+        });
+
+        let data = google.visualization.arrayToDataTable(dataArray);
+
+        let options = {
+          title : 'Average Bond return % by Country',
+          titleTextStyle: {
+            color: '#336699',
+            fontSize: 20,
+            bold: true
+          },
+          colorAxis: {colors: ['#FC2929', '#FCD529', '#46B83D']}, // Gradient from light to dark blue
+          backgroundColor: '#eef',
+          datalessRegionColor: '#E2E2E2', // Light gray for regions without data
+          defaultColor: '#E2E2E2', // Default color for regions without data
+        };
+
+        let chart = new google.visualization.GeoChart(document.getElementById('map2'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <body>
   
 <!-- Navbar -->
 <div th:replace="~{navbar :: navbar}"></div>
 
-<!-- Map1 -->
-<div id="map1" class="pt-10" style="height: 500px;"></div>
+<!-- Map2 -->
+<div class="flex flex-col items-center justify-center h-screen">
 
-<script>
-  async function loadMap() {
-    const response = await fetch('/bonds/average-profit-margin');
-    const data = await response.json();
-
-    const map = L.map('map1').setView([20, 0], 2); // Center the map
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-    }).addTo(map);
-
-    data.forEach(item => {
-      const country = item.country;
-      const avgProfitMargin = item.averageProfitMargin;
-
-      // Use a geocoding API to get latitude and longitude for the country
-      fetch(`https://nominatim.openstreetmap.org/search?country=${country}&format=json`)
-        .then(res => res.json())
-        .then(locationData => {
-          if (locationData.length > 0) {
-            const { lat, lon } = locationData[0];
-            L.marker([lat, lon])
-              .addTo(map)
-              .bindPopup(`<b>${country}</b><br>Avg Profit Margin: ${(avgProfitMargin * 100).toFixed(2)}%`);
-          }
-        });
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', loadMap);
-</script>
+<div>
+<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+  Average Bond return % by Country</h1>
+<p class="mb-6 mt-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+  Here at Bond Viewer you can see where there are the highest govenment bond returns around the globe.</p>
+</div>
+<div id="map2" class="pt-10 "></div>
+</div>
 
 </body>
 </html>
