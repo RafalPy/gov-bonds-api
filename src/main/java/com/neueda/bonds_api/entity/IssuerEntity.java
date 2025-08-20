@@ -18,6 +18,17 @@ public class IssuerEntity {
     private String continent;
     private String rating;
 
+    @OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BondEntity> bonds = new ArrayList<>();
+
+    public List<BondEntity> getBonds() {
+        return bonds;
+    }
+
+    public void setBonds(List<BondEntity> bonds) {
+        this.bonds = bonds;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -60,20 +71,12 @@ public class IssuerEntity {
         this.rating = rating;
     }
 
-    public IssuerEntity(long id, String country, String currency, String continent, String rating){
-        this.id = id;
-        this.country = country;
-        this.currency = currency;
-        this.continent = continent;
-        this.rating = rating;
-    }
 
     public Long getId() {
         return id;
     }
 
-    @OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BondEntity> bonds = new ArrayList<>();
+    
 
 
 

@@ -37,4 +37,8 @@ public class BondService {
         }
         bondRepository.deleteById(id);
     }
+
+    public BondEntity createBond(BondEntity bond) {
+        return bondRepository.save(bond);
+    }
 }
