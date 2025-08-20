@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class IssuerEntity {
@@ -19,7 +21,14 @@ public class IssuerEntity {
     private String rating;
 
     @OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<BondEntity> bonds = new ArrayList<>();
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public List<BondEntity> getBonds() {
         return bonds;
