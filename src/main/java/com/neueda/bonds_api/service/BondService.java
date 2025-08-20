@@ -1,8 +1,11 @@
 package com.neueda.bonds_api.service;
 
 import com.neueda.bonds_api.entity.BondEntity;
+import com.neueda.bonds_api.entity.IssuerEntity;
 import com.neueda.bonds_api.exception.BondNotFoundException;
+import com.neueda.bonds_api.exception.InvalidParamsException;
 import com.neueda.bonds_api.repository.BondRepository;
+import com.neueda.bonds_api.repository.IssuerRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +16,11 @@ import org.springframework.stereotype.Service;
 public class BondService {
 
     private final BondRepository bondRepository;
+    private final IssuerRepository issuerRepository;
 
-    public BondService(BondRepository bondRespository){
-        this.bondRepository=bondRespository;
+    public BondService(BondRepository bondRepository, IssuerRepository issuerRepository) {
+        this.bondRepository = bondRepository;
+        this.issuerRepository = issuerRepository;
     }
 
     public List<BondEntity> getAllBonds(){
@@ -39,6 +44,9 @@ public class BondService {
     }
 
     public BondEntity createBond(BondEntity bond) {
+         IssuerEntity issuer = issuerRepository.findById(bond.getIssuer().getId())
+            .orElseThrow(() -> new InvalidParamsException("Issuer with the given ID does not exist."));
+        bond.setIssuer(issuer);
         return bondRepository.save(bond);
     }
 }

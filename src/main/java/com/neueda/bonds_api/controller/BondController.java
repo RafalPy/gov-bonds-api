@@ -60,6 +60,9 @@ public class BondController {
 
     @PostMapping
     public ResponseEntity<BondEntity> createBond(@RequestBody BondEntity bond) {
+        if (bond.getIssuer() == null) {
+            throw new InvalidParamsException("Issuer must be provided for the bond.");
+        }
         BondEntity createdBond = bondService.createBond(bond);
         return ResponseEntity.ok(createdBond);
     

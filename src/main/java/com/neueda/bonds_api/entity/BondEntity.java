@@ -21,11 +21,18 @@ public class BondEntity {
     private LocalDate issueDate;
 
     @ManyToOne
-    @JoinColumn(name = "issuer_id") // just make it true if you need to post
+    @JoinColumn(name = "issuer_id", nullable = false) // just make it true if you need to post
     private IssuerEntity issuer;
 
     public LocalDate getExpiryDate() {
         return expiryDate;
+    }
+
+    public IssuerEntity getIssuer() {
+        return issuer;
+    }
+    public void setIssuer(IssuerEntity issuer) {
+        this.issuer = issuer;
     }
 
     public Long getId() {
