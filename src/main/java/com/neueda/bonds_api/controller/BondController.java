@@ -1,5 +1,6 @@
 package com.neueda.bonds_api.controller;
 
+import com.neueda.bonds_api.dto.BondRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,8 +60,8 @@ public class BondController {
     }
 
     @PostMapping
-    public ResponseEntity<BondEntity> createBond(@RequestBody BondEntity bond) {
-        BondEntity createdBond = bondService.createBond(bond);
+    public ResponseEntity<BondEntity> createBond(@RequestBody BondRequest bondRequest) {
+        BondEntity createdBond = bondService.addBond(bondRequest);
         return ResponseEntity.ok(createdBond);
     
     }

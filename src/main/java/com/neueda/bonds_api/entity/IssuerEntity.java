@@ -12,12 +12,10 @@ public class IssuerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String country;
     private String currency;
     private String continent;
     private String rating;
-
     @OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BondEntity> bonds = new ArrayList<>();
 
@@ -61,9 +59,13 @@ public class IssuerEntity {
         this.rating = rating;
     }
 
- 
-    public IssuerEntity(){
+    public Long getId() {
+        return id;
     }
+
+ 
+    public IssuerEntity(){}
+
     public IssuerEntity(String country, String currency, String continent, String rating){
         this.country = country;
         this.currency = currency;
@@ -71,10 +73,6 @@ public class IssuerEntity {
         this.rating = rating;
     }
 
-
-    public Long getId() {
-        return id;
-    }
 
     
 

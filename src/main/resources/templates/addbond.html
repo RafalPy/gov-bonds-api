@@ -5,7 +5,7 @@
     <title>Bond Viewer - Add Bond</title>
 
     <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
           font-family: Arial, sans-serif;
@@ -23,42 +23,85 @@
 <!-- Navbar -->
 <div th:replace="~{navbar :: navbar}"></div>
 
+<h1 class="text-2xl font-bold mb-6">Add New Bond</h1>
 
-<!-- Tailwind Form -->
+<form id="bondForm" class="pt-12 grid gap-6 mb-6 md:grid-cols-3">
 
-<form>
-  <div class="pt-12 grid gap-6 mb-6 md:grid-cols-3">
-      <div>
-          <label for="ticker" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ticker</label>
-          <input type="text" id="ticker" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TCK0001" required />
-      </div>
-      <div>
-          <label for="face_value" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Face Value</label>
-          <input type="number" id="face_value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100" required />
-      </div>
-      <div>
-          <label for="cost_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cost Price</label>
-          <input type="number" id="cost_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="92" required />
-      </div>  
-      <div>
-          <label for="expiry_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expiry Date</label>
-          <input type="date" id="expiry_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2029-11-13" required />
-      </div>
-      <div>
-          <label for="issue_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issue Date</label>
-          <input type="date" id="issue_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2025-08-19" required />
-      </div>
-      <div>
-          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issuer</label>
-          <input type="text" id="issuer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="US" required />
-      </div>
-  </div>
+    <div>
+        <label for="ticker" class="block mb-2 text-sm font-medium text-gray-900">Ticker</label>
+        <input type="text" id="ticker" name="ticker" placeholder="TCK0001" required
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
 
-  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-    Add Bond</button>
+    <div>
+        <label for="face_value" class="block mb-2 text-sm font-medium text-gray-900">Face Value</label>
+        <input type="number" id="face_value" name="faceValue" placeholder="100" required
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div>
+        <label for="cost_price" class="block mb-2 text-sm font-medium text-gray-900">Cost Price</label>
+        <input type="number" id="cost_price" name="costPrice" placeholder="92" required
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div>
+        <label for="expiry_date" class="block mb-2 text-sm font-medium text-gray-900">Expiry Date</label>
+        <input type="date" id="expiry_date" name="expiryDate" required
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div>
+        <label for="issue_date" class="block mb-2 text-sm font-medium text-gray-900">Issue Date</label>
+        <input type="date" id="issue_date" name="issueDate" required
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div>
+        <label for="issuer" class="block mb-2 text-sm font-medium text-gray-900">Issuer ID</label>
+        <input type="number" id="issuer" name="issuerId" placeholder="1" required
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div class="md:col-span-3">
+        <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">
+            Add Bond
+        </button>
+    </div>
 </form>
 
+<script>
+    document.getElementById('bondForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-</div>
+        const data = {
+            ticker: document.getElementById('ticker').value,
+            faceValue: Number(document.getElementById('face_value').value),
+            costPrice: Number(document.getElementById('cost_price').value),
+            expiryDate: document.getElementById('expiry_date').value,
+            issueDate: document.getElementById('issue_date').value,
+            issuerId: Number(document.getElementById('issuer').value)
+        };
+
+        fetch('/bonds', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to create bond");
+            return response.json();
+        })
+        .then(bond => {
+            alert('Bond created: ' + bond.ticker);
+            console.log(bond);
+            // Optionally reset form
+            document.getElementById('bondForm').reset();
+        })
+        .catch(err => alert(err));
+    });
+</script>
+
 </body>
 </html>
